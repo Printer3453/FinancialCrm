@@ -18,7 +18,7 @@ namespace FinancialCrm
             InitializeComponent();
         }
 
-        FinancialCrmDbEntities db = new FinancialCrmDbEntities();
+        FinancialCrmDbGuncelEntities db = new FinancialCrmDbGuncelEntities();
         private void btnList_Click(object sender, EventArgs e)
         {
             var values = db.Categories.ToList();

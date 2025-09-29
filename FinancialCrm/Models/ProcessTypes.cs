@@ -12,21 +12,21 @@ namespace FinancialCrm.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class ProcessTypes
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public ProcessTypes()
         {
-            this.Spendings = new HashSet<Spendings>();
-            this.Spendings1 = new HashSet<Spendings>();
+            this.BankProcesses = new HashSet<BankProcesses>();
+            this.BankProcesses1 = new HashSet<BankProcesses>();
         }
     
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public int ProcessTypeId { get; set; }
+        public string ProcessTypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Spendings> Spendings { get; set; }
+        public virtual ICollection<BankProcesses> BankProcesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Spendings> Spendings1 { get; set; }
+        public virtual ICollection<BankProcesses> BankProcesses1 { get; set; }
     }
 }

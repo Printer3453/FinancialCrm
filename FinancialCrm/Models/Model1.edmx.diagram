@@ -4,16 +4,31 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="206c6112f9ef4513a8ecb87b1d2a39e7" Name="Diagram1">
-        <EntityTypeShape EntityType="FinancialCrmDbModel.BankProcesses" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.Banks" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.Bills" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.Categories" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.Spendings" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FinancialCrmDbModel.Users" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
-        <AssociationConnector Association="FinancialCrmDbModel.FK_BankProcesses_Banks" ManuallyRouted="false" />
-        <AssociationConnector Association="FinancialCrmDbModel.FK_Spendings_Categories" ManuallyRouted="false" />
+      <Diagram DiagramId="e7023e1d78214930b30e8ce4004446de" Name="Diagram1" ZoomLevel="56">
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.BankProcesses" Width="1.5" PointX="10.5" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.Banks" Width="1.5" PointX="7.625" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.BillPeriods" Width="1.5" PointX="7.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.Bills" Width="1.5" PointX="10.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.Categories" Width="1.5" PointX="20.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.ProcessTypes" Width="1.5" PointX="13" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.Spendings" Width="1.5" PointX="17.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FinancialCrmDbGuncelModel.Users" Width="1.5" PointX="16.875" PointY="2.625" IsExpanded="true" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__BankProce__BankI__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__BankProce__Proce__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__BankProce__UserI__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_BankProcesses_Banks" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_BankProcesses_ProcessTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_BankProcesses_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Bills_Banks" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Spendings_Banks" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__Bills__BillPerio__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Bills_BillPeriods" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__Bills__UserId__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Bills_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__Spendings__Categ__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Spendings_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK__Spendings__UserI__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="FinancialCrmDbGuncelModel.FK_Spendings_Users" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

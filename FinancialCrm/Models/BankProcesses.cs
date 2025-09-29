@@ -17,10 +17,16 @@ namespace FinancialCrm.Models
         public int BankProcessId { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> ProcessDate { get; set; }
-        public string ProcessType { get; set; }
+        public Nullable<int> ProcessTypeId { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public Nullable<int> BankId { get; set; }
+        public Nullable<int> UserId { get; set; }
     
         public virtual Banks Banks { get; set; }
+        public virtual ProcessTypes ProcessTypes { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual Banks Banks1 { get; set; }
+        public virtual ProcessTypes ProcessTypes1 { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }

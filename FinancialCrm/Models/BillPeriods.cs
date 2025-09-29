@@ -12,21 +12,21 @@ namespace FinancialCrm.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Categories
+    public partial class BillPeriods
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Categories()
+        public BillPeriods()
         {
-            this.Spendings = new HashSet<Spendings>();
-            this.Spendings1 = new HashSet<Spendings>();
+            this.Bills = new HashSet<Bills>();
+            this.Bills1 = new HashSet<Bills>();
         }
     
-        public int CategoryId { get; set; }
-        public string CategoryName { get; set; }
+        public int BillPeriodId { get; set; }
+        public string PeriodName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Spendings> Spendings { get; set; }
+        public virtual ICollection<Bills> Bills { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Spendings> Spendings1 { get; set; }
+        public virtual ICollection<Bills> Bills1 { get; set; }
     }
 }

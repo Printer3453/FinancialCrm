@@ -18,14 +18,23 @@ namespace FinancialCrm.Models
         public Banks()
         {
             this.BankProcesses = new HashSet<BankProcesses>();
+            this.BankProcesses1 = new HashSet<BankProcesses>();
+            this.Bills = new HashSet<Bills>();
+            this.Spendings = new HashSet<Spendings>();
         }
     
         public int BankId { get; set; }
-        public string BankAccountNumber { get; set; }
         public string BankTitle { get; set; }
+        public string BankAccountNumber { get; set; }
         public Nullable<decimal> BankBalance { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BankProcesses> BankProcesses { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BankProcesses> BankProcesses1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Bills> Bills { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Spendings> Spendings { get; set; }
     }
 }

@@ -55,6 +55,7 @@
             this.btnBankTransactions.TabIndex = 3;
             this.btnBankTransactions.Text = "Banka Hareketleri";
             this.btnBankTransactions.UseVisualStyleBackColor = false;
+            this.btnBankTransactions.Click += new System.EventHandler(this.btnBankTransactions_Click);
             // 
             // btnBills
             // 

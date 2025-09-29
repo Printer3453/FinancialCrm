@@ -16,7 +16,7 @@ namespace FinancialCrm
         {
             InitializeComponent();
         }
-        FinancialCrmDbEntities db = new FinancialCrmDbEntities();
+        FinancialCrmDbGuncelEntities db = new FinancialCrmDbGuncelEntities();
         private void FrmDashboard_Load(object sender, EventArgs e)
         {
             var totalBalance = db.Banks.Sum(x => x.BankBalance);

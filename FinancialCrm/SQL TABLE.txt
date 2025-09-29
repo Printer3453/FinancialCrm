@@ -1,0 +1,160 @@
+﻿C# EĞİTİM KAMPI PROJESİ İÇİN OLUŞTURDUĞUM SQL(FINANCIAL CRM) SQL GÜNCELLEMESİ)
+
+TABLOYU YENİDEN GÜNCELLEDİM, DAHA İŞLEVSEL OLMASI AÇISINDAN
+
+CREATE TABLE Users (
+    UserId INT PRIMARY KEY IDENTITY(1,1),
+    UserName NVARCHAR(50),
+    Password NVARCHAR(50)
+);
+CREATE TABLE Banks (
+    BankId INT PRIMARY KEY IDENTITY(1,1),
+    BankTitle NVARCHAR(100),
+    BankAccountNumber NVARCHAR(50),
+    BankBalance DECIMAL(18,2) DEFAULT 0
+);
+CREATE TABLE ProcessTypes (
+    ProcessTypeId INT PRIMARY KEY IDENTITY(1,1),
+    ProcessTypeName NVARCHAR(50) -- Gelen Havale, Giden Havale
+);
+CREATE TABLE BankProcesses (
+    BankProcessId INT PRIMARY KEY IDENTITY(1,1),
+    Description NVARCHAR(200),
+    ProcessDate DATE,
+    ProcessTypeId INT FOREIGN KEY REFERENCES ProcessTypes(ProcessTypeId),
+    Amount DECIMAL(18,2),
+    BankId INT FOREIGN KEY REFERENCES Banks(BankId),
+    UserId INT FOREIGN KEY REFERENCES Users(UserId)
+);
+CREATE TABLE BillPeriods (
+    BillPeriodId INT PRIMARY KEY IDENTITY(1,1),
+    PeriodName NVARCHAR(50) -- Ocak 2023 gibi
+);
+CREATE TABLE Bills (
+    BillId INT PRIMARY KEY IDENTITY(1,1),
+    BillTitle NVARCHAR(100),
+    BillAmount DECIMAL(18,2),
+    BillPeriodId INT FOREIGN KEY REFERENCES BillPeriods(BillPeriodId),
+    IsPaid BIT DEFAULT 0,
+    UserId INT FOREIGN KEY REFERENCES Users(UserId)
+);
+CREATE TABLE Categories (
+    CategoryId INT PRIMARY KEY IDENTITY(1,1),
+    CategoryName NVARCHAR(50)
+);
+CREATE TABLE Spendings (
+    SpendingId INT PRIMARY KEY IDENTITY(1,1),
+    SpendingTitle NVARCHAR(100),
+    SpendingAmount DECIMAL(18,2),
+    SpendingDate DATE,
+    CategoryId INT FOREIGN KEY REFERENCES Categories(CategoryId),
+    UserId INT FOREIGN KEY REFERENCES Users(UserId)
+);
+
+
+ilişkileri de ekledim, böylece tablolar arası bağlantılar daha net oldu.
+
+ALTER TABLE BankProcesses
+ADD CONSTRAINT FK_BankProcesses_Users
+FOREIGN KEY (UserId) REFERENCES Users(UserId);
+
+ALTER TABLE Spendings
+ADD CONSTRAINT FK_Spendings_Users
+FOREIGN KEY (UserId) REFERENCES Users(UserId);
+
+ALTER TABLE Bills
+ADD CONSTRAINT FK_Bills_Users
+FOREIGN KEY (UserId) REFERENCES Users(UserId);
+
+
+
+ALTER TABLE BankProcesses
+ADD CONSTRAINT FK_BankProcesses_ProcessTypes
+FOREIGN KEY (ProcessTypeId) REFERENCES ProcessTypes(ProcessTypeId);
+
+
+ALTER TABLE Bills
+ADD CONSTRAINT FK_Bills_BillPeriods
+FOREIGN KEY (BillPeriodId) REFERENCES BillPeriods(BillPeriodId);
+
+
+ALTER TABLE Spendings
+ADD CONSTRAINT FK_Spendings_Categories
+FOREIGN KEY (CategoryId) REFERENCES Categories(CategoryId);
+
+
+ALTER TABLE BankProcesses
+ADD CONSTRAINT FK_BankProcesses_Banks
+FOREIGN KEY (BankId) REFERENCES Banks(BankId);
+
+
+
+
+ALTER TABLE BankProcesses
+ADD CONSTRAINT FK_BankProcesses_Banks
+FOREIGN KEY (BankId) REFERENCES Banks(BankId);
+
+-- İndeksler performans için eklenebilir
+CREATE INDEX IDX_BankProcesses_UserId ON BankProcesses(UserId);
+CREATE INDEX IDX_Spendings_UserId ON Spendings(UserId);
+CREATE INDEX IDX_Bills_UserId ON Bills(UserId);
+CREATE INDEX IDX_BankProcesses_ProcessTypeId ON BankProcesses(ProcessTypeId);
+CREATE INDEX IDX_Bills_BillPeriodId ON Bills(BillPeriodId);
+CREATE INDEX IDX_Spendings_CategoryId ON Spendings(CategoryId);
+CREATE INDEX IDX_BankProcesses_BankId ON BankProcesses(BankId);
+-- Varsayılan veriler eklenebilir
+INSERT INTO ProcessTypes (ProcessTypeName) VALUES ('Gelen Havale'), ('Giden Havale');
+INSERT INTO BillPeriods (PeriodName) VALUES ('Ocak 2023'), ('Şubat 2023'), ('Mart 2023');
+INSERT INTO Categories (CategoryName) VALUES ('Gıda'), ('Ulaşım'), ('Eğlence'), ('Fatura');
+-- Kullanıcı ekleme örneği
+INSERT INTO Users (UserName, Password) VALUES ('admin', 'password123');
+-- Banka ekleme örneği
+INSERT INTO Banks (BankTitle, BankAccountNumber, BankBalance) VALUES ('Garanti BB VA', '1234567890', 10000.00);
+-- Fatura ekleme örneği
+INSERT INTO Bills (BillTitle, BillAmount, BillPeriodId, IsPaid, UserId ) VALUES ('Elektrik Faturası', 150.75, 1, 0, 1);
+-- Harcama ekleme örneği
+INSERT INTO Spendings (SpendingTitle, SpendingAmount, SpendingDate, CategoryId, UserId) VALUES 
+('Market Alışverişi', 200.50, '2023-01-15', 1, 1);
+-- Banka işlemi ekleme örneği
+INSERT INTO BankProcesses (Description, ProcessDate, ProcessTypeId, Amount, BankId, UserId) VALUES 
+('Maaş Ödemesi', '2023-01-05 ', 1, 3000.00, 1, 1);
+-- Bu SQL betiği, Financial CRM projesi için gerekli tabloları, ilişkileri ve bazı varsayılan verileri oluşturur.
+-- İhtiyaçlarınıza göre daha fazla tablo, sütun veya veri ekleyebilirsiniz.
+-- Ayrıca, güvenlik ve performans için ek önlemler almayı unutmayın.
+-- Örneğin, kullanıcı şifrelerini hash'lemek ve indeksler eklemek gibi.
+-- Bu betiği çalıştırmadan önce veritabanınızda gerekli izinlere sahip olduğunuzdan emin olun.
+
+-- İyi çalışmalar
+
+
+
+
+
+
+
+
+
+
+
+
+
+ALTER TABLE Bills
+ADD BankId INT;
+
+ALTER TABLE Bills
+ADD CONSTRAINT FK_Bills_Banks FOREIGN KEY (BankId) REFERENCES Banks(BankId);
+
+
+--BU KODU EKLEDİM, ÇÜNKÜ FATURALARIN ÖDENDİĞİ BANKAYI TUTMASI GEREKİYOR.
+
+ALTER TABLE Spendings
+ADD BankId INT;
+
+
+ALTER TABLE Spendings
+ADD CONSTRAINT FK_Spendings_Banks FOREIGN KEY (BankId) REFERENCES Banks(BankId);
+
+--BU KODU EKLEDİM, ÇÜNKÜ HARCAMALARIN YAPILDIĞI BANKAYI TUTMASI GEREKİYOR.
+
+
+

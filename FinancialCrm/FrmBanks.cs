@@ -11,15 +11,15 @@ namespace FinancialCrm
         {
             InitializeComponent();
         }
-        FinancialCrmDbEntities db = new FinancialCrmDbEntities();
-        private void FrmBanks_Load(object sender, EventArgs e)
+        FinancialCrmDbGuncelEntities db = new FinancialCrmDbGuncelEntities();
+
+        void BankaBakiye()
         {
-            //BANKA BAKİYELERİ
-            var ziraatBankBalance = db.Banks.Where(b => 
-            b.BankTitle == "Ziraat").Select(y=>
+            var ziraatBankBalance = db.Banks.Where(b =>
+            b.BankTitle == "Ziraat Bankası").Select(y =>
             y.BankBalance).FirstOrDefault();
-            var vakıfBankBalance = db.Banks.Where(b => 
-            b.BankTitle == "VakıfBank").Select(y => 
+            var vakıfBankBalance = db.Banks.Where(b =>
+            b.BankTitle == "VakıfBank").Select(y =>
             y.BankBalance).FirstOrDefault();
             var IsBankBalance = db.Banks.Where(b =>
             b.BankTitle == "İş Bankası").Select(y =>
@@ -27,9 +27,12 @@ namespace FinancialCrm
             lblZiraatBank.Text = ziraatBankBalance.ToString() + " ₺";
             lblVakıfBank.Text = vakıfBankBalance.ToString() + " ₺";
             lblIsBank.Text = IsBankBalance.ToString() + " ₺";
-        //Banka Hareketleri
-             var bankProcess1 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Take(1).FirstOrDefault();
-            lblBankProcess1.Text = bankProcess1.Description + " " + bankProcess1.Amount + " ₺"+" "+ bankProcess1.ProcessDate;
+        }
+
+        void BankaHareketleri()
+        {
+            var bankProcess1 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Take(1).FirstOrDefault();
+            lblBankProcess1.Text = bankProcess1.Description + " " + bankProcess1.Amount + " ₺" + " " + bankProcess1.ProcessDate;
 
             var bankProcess2 = db.BankProcesses.OrderByDescending(x => x.BankProcessId).Skip(1).Take(1).FirstOrDefault();
             lblBankProcess2.Text = bankProcess2.Description + " " + bankProcess2.Amount + " ₺" + " " + bankProcess2.ProcessDate;
@@ -42,5 +45,91 @@ namespace FinancialCrm
             lblBankProcess5.Text = bankProcess5.Description + " " + bankProcess5.Amount + " ₺" + " " + bankProcess5.ProcessDate;
 
         }
+
+        private void FrmBanks_Load(object sender, EventArgs e)
+        {
+            //Banka Bakiyelerini Yeniden Hesapla
+            BankaBakiyeleriniYenidenHesapla();
+            //BANKA BAKİYELERİ
+            BankaBakiye();
+
+            //Banka Hareketleri
+            BankaHareketleri();
+            
+
+        }
+
+        
+
+
+        public void BankaBakiyeleriniYenidenHesapla()
+        {
+            //Burada bir banka bakiyelerini yeniden hesaplama fonksiyonu yazıyoruz.
+            //Ama şöyle bir durum var:
+            //1. BankProcesses (Gelen/Giden Havale)
+            //2. Bills (Ödenmiş faturalar)
+            //3. Spendings (Harcamalar)
+            // Yukarıdaki üç tablodaki işlemleri dikkate alarak, her bankanın bakiyesini yeniden hesaplayacağız.
+            //
+            var bankalar = db.Banks.ToList();
+
+            foreach (var banka in bankalar)
+            {
+                decimal toplamBakiye = 0;
+
+                // 1. BankProcesses (Gelen/Giden Havale)
+                var islemler = db.BankProcesses
+                    .Where(x => x.BankId == banka.BankId)
+                    .ToList();
+
+                foreach (var islem in islemler)
+                {
+                    var processType = db.ProcessTypes
+                        .Where(pt => pt.ProcessTypeId == islem.ProcessTypeId)
+                        .Select(pt => pt.ProcessTypeName)
+                        .FirstOrDefault();
+
+                    if (processType == "Gelen Havale")
+                        toplamBakiye += decimal.Parse( islem.Amount.ToString());
+                    else if (processType == "Giden Havale")
+                        toplamBakiye -=decimal.Parse(islem.Amount.ToString());
+                }
+
+
+
+
+                // 2. Bills (Ödenmiş faturalar)
+                var odenenFaturalar = db.Bills
+                    .Where(b => b.BankId == banka.BankId && b.IsPaid == true)
+                    .ToList();
+
+                foreach (var fatura in odenenFaturalar)
+                {
+                    toplamBakiye -= decimal.Parse(fatura.BillAmount.ToString());
+                }
+
+                // 3. Spendings (Harcamalar)
+                var harcamalar = db.Spendings
+                    .Where(s => s.BankId == banka.BankId)
+                    .ToList();
+
+                foreach (var harcama in harcamalar)
+                {
+                    toplamBakiye -= decimal.Parse(harcama.SpendingAmount.ToString());
+                }
+
+                // Güncelle
+                banka.BankBalance = toplamBakiye;
+            }
+
+            db.SaveChanges();
+        }
+
+        private void btnBakiyeReset_Click(object sender, EventArgs e)
+        {
+            BankaBakiyeleriniYenidenHesapla();
+        }
     }
+
 }
+

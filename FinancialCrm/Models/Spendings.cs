@@ -19,7 +19,13 @@ namespace FinancialCrm.Models
         public Nullable<decimal> SpendingAmount { get; set; }
         public Nullable<System.DateTime> SpendingDate { get; set; }
         public Nullable<int> CategoryId { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> BankId { get; set; }
     
+        public virtual Banks Banks { get; set; }
         public virtual Categories Categories { get; set; }
+        public virtual Categories Categories1 { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }
