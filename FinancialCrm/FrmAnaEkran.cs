@@ -77,5 +77,10 @@ namespace FinancialCrm
             lblBaslik.Text = "BANKA İŞLEMLERİ";
             FormuPaneldeAc(new FrmBankProcesses());
         }
+
+        private void btnBankTransactions_Click(object sender, EventArgs e)
+        {
+            lblBaslik.Text = "BANKA HAREKETLERİ";
+        }
     }
 }

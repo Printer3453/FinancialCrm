@@ -13,10 +13,10 @@ namespace FinancialCrm.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FinancialCrmDbEntities : DbContext
+    public partial class FinancialCrmDbGuncelEntities : DbContext
     {
-        public FinancialCrmDbEntities()
-            : base("name=FinancialCrmDbEntities")
+        public FinancialCrmDbGuncelEntities()
+            : base("name=FinancialCrmDbGuncelEntities")
         {
         }
     
@@ -27,10 +27,11 @@ namespace FinancialCrm.Models
     
         public virtual DbSet<BankProcesses> BankProcesses { get; set; }
         public virtual DbSet<Banks> Banks { get; set; }
+        public virtual DbSet<BillPeriods> BillPeriods { get; set; }
         public virtual DbSet<Bills> Bills { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<ProcessTypes> ProcessTypes { get; set; }
         public virtual DbSet<Spendings> Spendings { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Users> Users { get; set; }
     }
 }

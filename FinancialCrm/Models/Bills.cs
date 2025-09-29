@@ -17,6 +17,15 @@ namespace FinancialCrm.Models
         public int BillId { get; set; }
         public string BillTitle { get; set; }
         public Nullable<decimal> BillAmount { get; set; }
-        public string BillPeriod { get; set; }
+        public Nullable<int> BillPeriodId { get; set; }
+        public Nullable<bool> IsPaid { get; set; }
+        public Nullable<int> UserId { get; set; }
+        public Nullable<int> BankId { get; set; }
+    
+        public virtual Banks Banks { get; set; }
+        public virtual BillPeriods BillPeriods { get; set; }
+        public virtual BillPeriods BillPeriods1 { get; set; }
+        public virtual Users Users { get; set; }
+        public virtual Users Users1 { get; set; }
     }
 }
