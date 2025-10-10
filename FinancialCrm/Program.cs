@@ -17,6 +17,7 @@ namespace FinancialCrm
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmAnaEkran());
+            // burada hang formu açmak istiyorsak onu yazıyoruz.
         }
     }
 }
