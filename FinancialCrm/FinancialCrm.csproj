@@ -59,40 +59,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FrmBankProcesses.cs">
+    <Compile Include="DataAccsessLayer\Abstract\IBankProcessesDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\IBanksDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\IBillPeriodsDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\IBillsDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\ICategoriesDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\IGenericDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\IProcessTypesDal.cs" />
+    <Compile Include="DataAccsessLayer\Abstract\ISpendingsDal.cs" />
+    <Compile Include="DataAccsessLayer\Concrete\Context.cs" />
+    <Compile Include="EntityLayer\Concreate\BankProcesses.cs" />
+    <Compile Include="EntityLayer\Concreate\Banks.cs" />
+    <Compile Include="EntityLayer\Concreate\BillPeriods.cs" />
+    <Compile Include="EntityLayer\Concreate\Bills.cs" />
+    <Compile Include="EntityLayer\Concreate\Categories.cs" />
+    <Compile Include="EntityLayer\Concreate\ProcessTypes.cs" />
+    <Compile Include="EntityLayer\Concreate\Spendings.cs" />
+    <Compile Include="EntityLayer\Concreate\Users.cs" />
+    <Compile Include="Forms\FrmBankProcesses.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmBankProcesses.Designer.cs">
+    <Compile Include="Forms\FrmBankProcesses.Designer.cs">
       <DependentUpon>FrmBankProcesses.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmCategories.cs">
+    <Compile Include="Forms\FrmCategories.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmCategories.Designer.cs">
+    <Compile Include="Forms\FrmCategories.Designer.cs">
       <DependentUpon>FrmCategories.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAnaEkran.cs">
+    <Compile Include="Forms\FrmAnaEkran.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAnaEkran.Designer.cs">
+    <Compile Include="Forms\FrmAnaEkran.Designer.cs">
       <DependentUpon>FrmAnaEkran.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmBanks.cs">
+    <Compile Include="Forms\FrmBanks.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmBanks.Designer.cs">
+    <Compile Include="Forms\FrmBanks.Designer.cs">
       <DependentUpon>FrmBanks.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmBilling.cs">
+    <Compile Include="Forms\FrmBilling.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmBilling.Designer.cs">
+    <Compile Include="Forms\FrmBilling.Designer.cs">
       <DependentUpon>FrmBilling.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmDashboard.cs">
+    <Compile Include="Forms\FrmDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmDashboard.Designer.cs">
+    <Compile Include="Forms\FrmDashboard.Designer.cs">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BankProcesses.cs">
@@ -136,22 +153,23 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FrmBankProcesses.resx">
+    <Compile Include="DataAccsessLayer\Repository\GenericRepository.cs" />
+    <EmbeddedResource Include="Forms\FrmBankProcesses.resx">
       <DependentUpon>FrmBankProcesses.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmCategories.resx">
+    <EmbeddedResource Include="Forms\FrmCategories.resx">
       <DependentUpon>FrmCategories.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAnaEkran.resx">
+    <EmbeddedResource Include="Forms\FrmAnaEkran.resx">
       <DependentUpon>FrmAnaEkran.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmBanks.resx">
+    <EmbeddedResource Include="Forms\FrmBanks.resx">
       <DependentUpon>FrmBanks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmBilling.resx">
+    <EmbeddedResource Include="Forms\FrmBilling.resx">
       <DependentUpon>FrmBilling.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmDashboard.resx">
+    <EmbeddedResource Include="Forms\FrmDashboard.resx">
       <DependentUpon>FrmDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -200,6 +218,7 @@
     </Content>
     <Content Include="SQL TABLE.txt" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
